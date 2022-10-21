@@ -1,4 +1,6 @@
-import { ListGroup } from "react-bootstrap";
+import { GoogleAuthProvider } from "firebase/auth";
+import { useContext } from "react";
+import { ListGroup, Navbar } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 
@@ -11,21 +13,33 @@ import {
   FaDiscord,
   FaTelegram,
 } from "react-icons/fa";
+import { AuthContext } from "../../Contexts/AuthProvider";
 import BrandCarousel from "../BrandCarousel/BrandCarousel";
 
-
 const RightSideNav = () => {
+  const { providerLogin } = useContext(AuthContext);
+  const googleProvider = new GoogleAuthProvider();
+  const handleGoogleSignIn = () => {
+    providerLogin(googleProvider)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   return (
-    <div>
-      <ButtonGroup vertical className="mb-2 w-100">
+    <Navbar sticky="top" style={{ flexDirection: "column", top: "80px" }}>
+      <ButtonGroup vertical className="mb-2 gap-1">
         <Button
-          className="d-flex gap-2 align-items-center justify-content-center mb-1"
-          variant="outline-primary"
+          onClick={handleGoogleSignIn}
+          className="d-flex gap-2 align-items-center  px-4 justify-content-center"
+          variant="outline-primary" style={{zIndex: 1}}
         >
           <FaGoogle /> Login with Google
         </Button>
         <Button
-          className="d-flex gap-2 align-items-center justify-content-center"
+          className="d-flex gap-2 align-items-center  px-4 justify-content-center"
           variant="outline-dark"
         >
           {" "}
@@ -33,7 +47,7 @@ const RightSideNav = () => {
         </Button>
       </ButtonGroup>
       <div className="mt-3">
-        <h6>Find us on</h6>
+        <h5>Find us on</h5>
         <ListGroup className="mt-2">
           <ListGroup.Item className="d-flex gap-2 align-items-center  mb-1 px-5">
             <FaFacebook /> Facebook
@@ -59,7 +73,7 @@ const RightSideNav = () => {
       <div className="mt-4">
         <BrandCarousel />
       </div>
-    </div>
+    </Navbar>
   );
 };
 

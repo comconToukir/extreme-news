@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCPh7lnRZ7lI3b2vQUbZ4ceB-wc3LSXBs4",
-  authDomain: "extreme-news.firebaseapp.com",
-  projectId: "extreme-news",
-  storageBucket: "extreme-news.appspot.com",
-  messagingSenderId: "12298980440",
-  appId: "1:12298980440:web:ad8151a3b8925da4e08e2d"
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId
 };
 
 // Initialize Firebase

@@ -1,20 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { CategoriesContext } from '../../Contexts/CategoriesContext';
+import React, { useContext, useEffect, useState } from "react";
+import { Navbar } from "react-bootstrap";
+import { Link, NavLink } from "react-router-dom";
+import { CategoriesContext } from "../../Contexts/CategoriesContext";
 
 const LeftSideNav = () => {
   const { categories } = useContext(CategoriesContext);
   return (
-    <div>
-      <h4>All Categories {categories.length}</h4>
+    <Navbar sticky="top" style={{ flexDirection: "column", top: "80px" }}>
+      <h6>All Categories</h6>
       <div>
-        {
-          categories.map(category => <p key={category.id}>
+        {categories.map((category) => (
+          <p key={category.id}>
             <NavLink to={`/category/${category.id}`}>{category.name}</NavLink>
-          </p>)
-        }
+          </p>
+        ))}
       </div>
-    </div>
+    </Navbar>
   );
 };
 
